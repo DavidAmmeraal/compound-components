@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DeliciousStory } from "./components/DeliciousMenu/DeliciousMenu.stories";
 import {
   NotSoOkayStory,
@@ -9,20 +10,31 @@ import {
 } from "./components/YuckyMenu/YuckyMenu.stories";
 
 const stories = {
-  a: YuckyStory,
-  b: CustomYuckyStory,
-  c: OkayStory,
-  d: NotSoOkayStory,
-  e: DeliciousStory,
+  YuckyStory,
+  CustomYuckyStory,
+  OkayStory,
+  NotSoOkayStory,
+  DeliciousStory,
 };
 
-// Amazing method of selecting an active story.
-const activeStory = "e";
+type StoryKey = keyof typeof stories;
 
 const App = () => {
+  const [activeStory, setActiveStory] = useState<StoryKey>("YuckyStory");
+
   const Story = stories[activeStory];
+
   return (
     <div>
+      <select
+        onChange={(event) => setActiveStory(event.target.value as StoryKey)}
+      >
+        {Object.keys(stories).map((name) => (
+          <option value={name} selected={name === activeStory}>
+            {name}
+          </option>
+        ))}
+      </select>
       <Story />
     </div>
   );

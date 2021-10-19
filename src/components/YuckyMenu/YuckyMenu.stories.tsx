@@ -60,7 +60,7 @@ export const CustomYuckyStory = () => {
 
   return (
     <div className="App h-screen flex items-center justify-center flex-col">
-      <h1 className="text-5xl mb-5">Yucky story</h1>
+      <h1 className="text-5xl mb-5">Custom Yucky story</h1>
       <YuckyMenu
         header="Your menu"
         headerClassName="customHeader"
