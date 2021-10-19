@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { DeliciousStory } from "./components/DeliciousMenu/DeliciousMenu.stories";
+import {
+  NotSoOkayStory,
+  OkayStory,
+} from "./components/OkayMenu/OkayMenu.stories";
+import {
+  CustomYuckyStory,
+  YuckyStory,
+} from "./components/YuckyMenu/YuckyMenu.stories";
 
-function App() {
+const stories = {
+  a: YuckyStory,
+  b: CustomYuckyStory,
+  c: OkayStory,
+  d: NotSoOkayStory,
+  e: DeliciousStory,
+};
+
+// Amazing method of selecting an active story.
+const activeStory = "e";
+
+const App = () => {
+  const Story = stories[activeStory];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Story />
     </div>
   );
-}
+};
 
 export default App;

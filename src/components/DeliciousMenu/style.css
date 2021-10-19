@@ -1,0 +1,7 @@
+.header {
+  color: blue;
+}
+
+.custom-item[data-selected="true"] {
+  color: red;
+}
