@@ -1,7 +1,6 @@
 import React from "react";
 import { cx } from "../../aliases";
 import { CssFC } from "../../types";
-import OkayMenuItem from "./OkayMenuItem";
 
 export type OkayMenuProps = {
   header?: React.ReactNode;
@@ -47,7 +46,7 @@ export const OkayMenu: CssFC<OkayMenuProps> = ({
         if (!React.isValidElement(child)) {
           return child;
         }
-        if (child.type === OkayMenuItem) {
+        if (child.props.id) {
           return React.cloneElement(child, {
             ...child.props,
             __selected: selected === child.props?.id,

@@ -57,7 +57,7 @@ export const DeliciousStory = () => {
       <DeliciousMenu selected={selected} onSelect={setSelected}>
         <div>
           <DeliciousMenu.Header className="header">
-            Your menu
+            Some header
           </DeliciousMenu.Header>
           <DeliciousMenu.Item id="1" className="custom-item">
             Account

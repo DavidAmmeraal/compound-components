@@ -1,5 +1,9 @@
-.customHeader {
+.header {
   color: blue;
+}
+
+.item {
+  color: lightsalmon;
 }
 
 .activeItem {

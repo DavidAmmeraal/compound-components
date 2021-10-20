@@ -1,13 +1,13 @@
 import { cx } from "../../aliases";
 import { CssFC } from "../../types";
 
-type OkayMenuItemProps = {
+export interface OkayMenuItemProps {
   id: string;
   activeClassName?: string;
   // these props are prefixed with __ to communicate they're not to be used.
   __selected?: boolean;
   __onSelect?: () => {};
-};
+}
 
 const OkayMenuItem: CssFC<OkayMenuItemProps> = ({
   id,

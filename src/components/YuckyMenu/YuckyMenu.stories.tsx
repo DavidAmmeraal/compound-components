@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { YuckyMenu } from "./YuckyMenu";
 import "./style.css";
+import CustomYuckyMenu, { CustomYuckyMenuItem } from "./CustomYuckyMenu";
 
 const menu = [
   {
@@ -13,31 +14,42 @@ const menu = [
   },
 ];
 
+const customMenu: CustomYuckyMenuItem[] = [
+  {
+    type: "item",
+    id: "1",
+    label: "Account",
+  },
+  {
+    type: "separator",
+  },
+  {
+    type: "item",
+    id: "2",
+    label: "Settings",
+  },
+  {
+    type: "switch",
+    id: "3",
+    label: "Power",
+  },
+];
+
 /**
  * Yuck!!!
  *
  * There's several issues with this component:
  *
- * - What if we want to use something else then <li> as a list item? We need to edit our
- *   configuration and dive into NastyMenu to support this. We could employ render props to
- *   tackle this issue, and defer this responsibility to the containing component,
- *   but this would require the necessity of another prop on <NastyMenu />.
- *   Also render props can also start containing a lot of conditional logic increasing
- *   complexity while reducing comprehensibility.
+ * - What if we want to use something else then <li> as a list item?
  *
  * - If we want to customise rendering behaviour of the existing <li>’s like css or something
- *   depending component state, we would either to have to make this configurable, or we would
- *   have to rely on a render prop again.
+ *   depending component state, we would either to have to make this configurable.
  *
  * - What if I want to add another section to the Menu, for example a separator or a footer? Once
- *   again, I would have to define another prop, and dive into the <NastyMenu /> component and further
+ *   again, I would have to define or modify a prop, and dive into the <NastyMenu /> component and further
  *   increase it’s complexity.
  *
- * - All the different prop names to support classnames for all different sections of the menu is ugly
- *   AF, and hard to comprehend.
- *
- * We can do better! (BTW, I'm not making this shit up, there's several components in our codebase that
- * employ this pattern)
+ * Let's try...
  */
 export const YuckyStory = () => {
   const [selected, setSelected] = useState("1");
@@ -45,27 +57,36 @@ export const YuckyStory = () => {
   return (
     <div className="App h-screen flex items-center justify-center flex-col">
       <h1 className="text-5xl mb-5">Yucky story</h1>
-      <YuckyMenu
-        header="Your menu"
-        items={menu}
-        selected={selected}
-        onSelect={setSelected}
-      />
+      <YuckyMenu items={menu} selected={selected} onSelect={setSelected} />
     </div>
   );
 };
 
+/**
+ * Great, we refactored YuckyMenu (now in ./CustomYuckyMenu.tsx), we added support for:
+ *
+ * - A header.
+ * - We can style the header through headerClassName.
+ * - We can style the items through itemClassName and activeItemClassName.
+ * - We can add a separator.
+ * - We have a new type of item.
+ *
+ * But in order to facility this, we added a LOT of complexity to CustomYuckyMenu.
+ *
+ * We can do better.
+ */
 export const CustomYuckyStory = () => {
   const [selected, setSelected] = useState("1");
 
   return (
     <div className="App h-screen flex items-center justify-center flex-col">
       <h1 className="text-5xl mb-5">Custom Yucky story</h1>
-      <YuckyMenu
-        header="Your menu"
-        headerClassName="customHeader"
+      <CustomYuckyMenu
+        items={customMenu}
+        header="Some header"
+        headerClassName="header"
+        itemClassName="item"
         activeItemClassName="activeItem"
-        items={menu}
         selected={selected}
         onSelect={setSelected}
       />
